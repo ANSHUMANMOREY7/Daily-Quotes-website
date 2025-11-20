@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import quoteRoutes from "./routes/quoteRoutes.js";
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 // MongoDB (you can change URL later)
 mongoose
@@ -12,6 +15,7 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
+  app.use("/api/quotes", quoteRoutes);
 // Basic route
 app.get("/", (req, res) => {
   res.send("Daily Quotes API is running...");
